@@ -1,6 +1,6 @@
 import axios, {Method} from "axios";
 
-export const executeRequest = (endpoint: string, method : Method, body? : any) => {
+export const executeRequest = (endpoint: string, method : Method, body? : any, url?: string) => {
     const headers = { 'Content-Type' : 'application/json'} as any;
 
     const token = localStorage.getItem('accessToken');
@@ -13,8 +13,8 @@ export const executeRequest = (endpoint: string, method : Method, body? : any) =
     if(method == "OPTIONS") {
         headers['Access-Control-Allow-Methods'] = "PUT, POST, PATCH, DELETE, GET";
     }
-
-    const URL = (method == 'GET' ? 'http://localhost:5002/api/v1/' : 'http://localhost:5000/api/v1/') + endpoint;
+    
+    const URL = (url ? url : (method == 'GET' ? 'http://localhost:5002/api/v1/' : 'http://localhost:5000/api/v1/')) + endpoint;
     console.log(`executando: ${URL}, metodo: ${method} e body: ${body}`);
 
     return axios.request({

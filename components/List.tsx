@@ -20,43 +20,43 @@ export const List : NextPage<ListProps> = ({list, getFilteredList}) =>{
     const [error, setError] = useState('');
     const [_id, setId] = useState('');
     const [name, setName] = useState('');
-    const [previsionDate, setPrevisionDate] = useState('');
-    const [finishDate, setFinishDate] = useState('');
-    const [previsionDateInputType, setPrevisionDateInputType] = useState('text');
-    const [finishDateInputType, setFinishDateInputType] = useState('text');
+    const [description, setDescription] = useState('');
+    const [address, setAddress] = useState('');
+    const [cep, setCEP] = useState('');
 
     const closeModal = () => {
         setShowModal(false);
         setLoading(false);
         setError('');
         setName('');
-        setPrevisionDate('');
     }
 
     const selectRoom = (room:Room) => {
         setShowModal(true);
         setName(room.name);
+        setDescription(room.description);
+        setAddress(room.address);
+        setCEP(room.cep);
         setId(room.id || '');
     }
 
     const updateRoom = async() => {
         try{
-            if(!_id || !name || !previsionDate){
+            if(!_id || !name || !description || !address || !cep){
                 return setError('Favor preencher os campos.');
             }
 
             setLoading(true);
 
             const body = {
+                id: _id,
                 name,
-                finishPrevisionDate:previsionDate
+                description,
+                address,
+                cep    
             } as any;
 
-            if(finishDate){
-                body.finishDate = finishDate;
-            }
-
-            await executeRequest('room?id='+_id, 'PUT', body);
+            await executeRequest('room', 'PUT', body);
             await getFilteredList();
             closeModal();
         }catch(e : any){
@@ -117,12 +117,12 @@ export const List : NextPage<ListProps> = ({list, getFilteredList}) =>{
                         {error && <p className='error'>{error}</p>}
                         <input type="text" placeholder='Nome da sala'
                             value={name} onChange={e => setName(e.target.value)}/>
-                        <input type={previsionDateInputType} placeholder='Data de previsão da sala'
-                            onFocus={e => setPrevisionDateInputType('date')} onBlur={e => !e.target.value ? setPrevisionDateInputType('text') : false}
-                            value={previsionDate} onChange={e => setPrevisionDate(e.target.value)}/>
-                        <input type={finishDateInputType} placeholder='Data de conclusão'
-                            onFocus={e => setFinishDateInputType('date')} onBlur={e => !e.target.value ? setFinishDateInputType('text') : false}
-                            value={finishDate} onChange={e => setFinishDate(e.target.value)}/>
+                        <input type="text" placeholder='Descrição da sala'
+                            value={description} onChange={e => setDescription(e.target.value)}/>
+                        <input type="text" placeholder='Endereço'
+                            value={address} onChange={e => setAddress(e.target.value)}/>
+                        <input type="text" placeholder='CEP'
+                            value={cep} onChange={e => setCEP(e.target.value)}/>
                 </Modal.Body>
                 <Modal.Footer>
                     <div className='button col-12'>

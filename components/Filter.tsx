@@ -6,7 +6,7 @@ export const Filter : NextPage = ({}) =>{
     return (
         <div className='container-filter'>
             <div className='title'>
-                <span>Salas</span>  
+                <span>Gerenciar salas cadastradas</span>  
             </div>
         </div>
     );

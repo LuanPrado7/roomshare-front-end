@@ -3,5 +3,5 @@ export type Room = {
     name : string, 
     description: string,
     address: string,
-    cep: number    
+    cep: string    
 }

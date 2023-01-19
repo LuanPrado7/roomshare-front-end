@@ -20,14 +20,14 @@ const Home: NextPage = () => {
   }, []);
 
   return (
-    <Principal setAccessToken={setAccessToken}/>
-    // <>
-    //   {!accessToken ? 
-    //     <Login setAccessToken={setAccessToken}/> 
-    //     : 
-    //     <Principal setAccessToken={setAccessToken}/>
-    //   }
-    // </>
+    // <Principal setAccessToken={setAccessToken}/>
+    <>
+      {!accessToken ? 
+        <Login setAccessToken={setAccessToken}/> 
+        : 
+        <Principal setAccessToken={setAccessToken}/>
+      }
+    </>
   );
 }
 

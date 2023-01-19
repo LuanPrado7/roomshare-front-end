@@ -30,11 +30,11 @@ export const Login : NextPage<LoginProps> = ({setAccessToken}) =>{
             setLoading(true);
 
             const body = {
-                login: email,
+                email: email,
                 password
             };
 
-            const result = await executeRequest('login', 'POST', body);
+            const result = await executeRequest('login', 'POST', body, 'http://localhost:5003/api/');
             if(result && result.data){
                localStorage.setItem('accessToken', result.data.token);
                localStorage.setItem('name', result.data.name);
@@ -64,18 +64,19 @@ export const Login : NextPage<LoginProps> = ({setAccessToken}) =>{
             const body = {
                 name: nameSignUp,
                 email: emailSignUp,
-                password: passwordSignUp
+                password: passwordSignUp,
+                userType: "PF"
             };
 
-            const result = await executeRequest('user', 'POST', body);
+            const result = await executeRequest('user', 'POST', body, 'http://localhost:5003/api/');
             if(result && result.data){
                
                 const body = {
-                    login: emailSignUp,
+                    email: emailSignUp,
                     password: passwordSignUp
                 };
     
-                const result = await executeRequest('login', 'POST', body);
+                const result = await executeRequest('login', 'POST', body, 'http://localhost:5003/api/');
                 if(result && result.data){
                    localStorage.setItem('accessToken', result.data.token);
                    localStorage.setItem('name', result.data.name);

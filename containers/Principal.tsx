@@ -35,18 +35,8 @@ export const Principal : NextPage<PrincipalProps> = ({setAccessToken}) =>{
     }
 
     const getFilteredList = async() => {
-        try{
-            let filters = '?status='+status;
-
-            if(previsionDateStart){
-                filters+= '&finishPrevisionStart='+previsionDateStart;
-            }
-
-            if(previsionDateEnd){
-                filters+= '&finishPrevisionEnd='+previsionDateEnd;
-            }
-            
-            const result = await executeRequest('room'+filters, 'GET');
+        try{            
+            const result = await executeRequest('room', 'GET');
             if(result && result.data){
                setList(result.data);
             }
@@ -64,6 +54,9 @@ export const Principal : NextPage<PrincipalProps> = ({setAccessToken}) =>{
         setLoading(false);
         setError('');
         setName('');
+        setDescription('');
+        setAddress('');
+        setCEP('');
     }
 
     const insertRoom = async() => {

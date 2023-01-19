@@ -28,11 +28,11 @@ export const Header : NextPage<HeaderProps> = ({sair, showModal}) =>{
             <img src='/roomshare.png' alt='Logo Fiap' className='logo'/>
             <button onClick={showModal}><span>+</span> Adicionar sala</button>
             <div className='mobile'>
-                <span>Olá, {firstName}</span>
+                <span>Olá, {fullName}</span>
                 <img src='/exit-mobile.svg' alt="Sair" onClick={sair}/>
             </div>
             <div className='desktop'>
-                <span>Olá, {firstName}</span>
+                <span>Olá, {fullName}</span>
                 <img src='/exit-desktop.svg' alt="Sair" onClick={sair}/>
             </div>
         </div>
